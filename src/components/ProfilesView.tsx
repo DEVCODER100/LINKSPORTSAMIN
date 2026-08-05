@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { Search, X, Mail, MapPin } from 'lucide-react';
+import { Search, X, Mail, MapPin, Phone } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { adminAPI } from '@/lib/api';
 import { formatDate } from '@/lib/utils';
@@ -71,7 +71,10 @@ export default function ProfilesView({ type, title }: { type: Type; title: strin
                       <td className="px-4 py-3 font-medium text-gray-900 capitalize">{String(name(r)).toLowerCase()}</td>
                       <td className="px-4 py-3 text-gray-600 capitalize">{detail(r)}</td>
                       <td className="px-4 py-3 text-gray-500">{place(r)}</td>
-                      <td className="px-4 py-3 text-gray-500 text-xs">{r.owner?.email || '—'}</td>
+                      <td className="px-4 py-3 text-gray-500 text-xs">
+                        <div>{r.owner?.email || '—'}</div>
+                        {r.owner?.phone && <a href={`tel:${r.owner.phone}`} className="text-gray-400 hover:text-brand">{r.owner.phone}</a>}
+                      </td>
                       <td className="px-4 py-3 text-xs text-gray-400">{formatDate(r.owner?.joinedAt || r.createdAt)}</td>
                     </tr>
                   ))}
@@ -98,6 +101,7 @@ export default function ProfilesView({ type, title }: { type: Type; title: strin
             </div>
             <div className="space-y-1.5 text-sm text-gray-600 mb-4">
               {drawer.owner?.email && <p className="flex items-center gap-2"><Mail className="w-4 h-4 text-gray-400" /> {drawer.owner.email}</p>}
+              {drawer.owner?.phone && <p className="flex items-center gap-2"><Phone className="w-4 h-4 text-gray-400" /> <a href={`tel:${drawer.owner.phone}`} className="hover:text-brand">{drawer.owner.phone}</a></p>}
               <p className="flex items-center gap-2"><MapPin className="w-4 h-4 text-gray-400" /> {place(drawer)}</p>
             </div>
             <pre className="text-[11px] bg-gray-50 border border-gray-200 rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-words text-gray-700">

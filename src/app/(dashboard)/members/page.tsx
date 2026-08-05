@@ -57,7 +57,7 @@ export default function MembersPage() {
       <div className="card p-3 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[200px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input className="input pl-9" placeholder="Search by email…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} />
+          <input className="input pl-9" placeholder="Search by email or phone…" value={q} onChange={(e) => { setQ(e.target.value); setPage(1); }} />
         </div>
         <select className="input w-auto" value={role} onChange={(e) => { setRole(e.target.value); setPage(1); }}>
           <option value="">All roles</option>
@@ -76,6 +76,7 @@ export default function MembersPage() {
               <thead className="bg-gray-50 text-gray-500 text-xs uppercase">
                 <tr>
                   <th className="text-left px-4 py-3">Email</th>
+                  <th className="text-left px-4 py-3">Phone</th>
                   <th className="text-left px-4 py-3">Role</th>
                   <th className="text-left px-4 py-3">Status</th>
                   <th className="text-left px-4 py-3">Joined</th>
@@ -86,6 +87,7 @@ export default function MembersPage() {
                 {rows.map((u) => (
                   <tr key={u._id} className="hover:bg-gray-50">
                     <td className="px-4 py-3"><button onClick={() => setModal(u)} className="font-medium text-gray-900 hover:text-brand">{u.email}</button></td>
+                    <td className="px-4 py-3 whitespace-nowrap">{u.phone ? <a href={`tel:${u.phone}`} className="text-gray-700 hover:text-brand">{u.phone}</a> : <span className="text-gray-300">—</span>}</td>
                     <td className="px-4 py-3"><span className="text-xs font-semibold uppercase text-brand">{u.role}</span></td>
                     <td className="px-4 py-3">
                       {u.isSuspended ? <span className="text-xs font-semibold text-red-600">Suspended</span> :

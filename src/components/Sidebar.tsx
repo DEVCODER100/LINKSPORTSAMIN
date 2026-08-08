@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
-  LayoutDashboard, Users, Trophy, Building2, Dumbbell, Medal, ClipboardCheck, LogOut, ShieldCheck,
+  LayoutDashboard, Users, Building2, Dumbbell, Medal, ClipboardCheck, LogOut, ShieldCheck,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 
@@ -13,7 +13,6 @@ const LINKS = [
   { href: '/athletes', label: 'Athletes', icon: Medal },
   { href: '/coaches', label: 'Coaches', icon: Dumbbell },
   { href: '/organizations', label: 'Organizations', icon: Building2 },
-  { href: '/predictions', label: 'Predictions', icon: Trophy },
   { href: '/approvals', label: 'Approvals', icon: ClipboardCheck },
 ];
 

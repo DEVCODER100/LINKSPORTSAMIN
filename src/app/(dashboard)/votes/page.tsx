@@ -35,6 +35,12 @@ export default function VotesPage() {
   }, [page, q, player]);
   useEffect(() => { const t = setTimeout(load, 300); return () => clearTimeout(t); }, [load]);
 
+  const reset = async () => {
+    if (!confirm('Delete ALL votes? This permanently clears every vote (use to wipe test data before the event). This cannot be undone.')) return;
+    try { const r = await adminAPI.resetVotes(); toast.success(`Cleared ${r.data.data?.deleted ?? 0} votes`); load(); }
+    catch { toast.error('Failed to reset votes'); }
+  };
+
   const pct = (n: number) => (counts.total ? Math.round((n / counts.total) * 100) : 0);
 
   return (
@@ -44,7 +50,10 @@ export default function VotesPage() {
           <h1 className="text-2xl font-bold text-gray-900">Event Votes</h1>
           <p className="text-sm text-gray-500">Footiefiesta — Messi vs Ronaldo · {counts.total} total votes</p>
         </div>
-        <button onClick={load} className="btn-ghost flex items-center gap-2"><RefreshCw className="w-4 h-4" /> Refresh</button>
+        <div className="flex items-center gap-2">
+          <button onClick={load} className="btn-ghost flex items-center gap-2"><RefreshCw className="w-4 h-4" /> Refresh</button>
+          <button onClick={reset} className="px-3 py-1.5 text-sm font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50">Reset all votes</button>
+        </div>
       </div>
 
       {/* Score cards */}

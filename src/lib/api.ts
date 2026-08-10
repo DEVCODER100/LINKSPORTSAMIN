@@ -83,6 +83,7 @@ export const adminAPI = {
   suspendUser: (id: string) => api.patch(`/admin/users/${id}/suspend`),
   getProfiles: (params: Record<string, unknown>) => api.get('/admin/profiles', { params }),
   getVotes: (params?: Record<string, unknown>) => api.get('/admin/votes', { params }),
+  resetVotes: () => api.delete('/admin/votes'),
   getPendingOrganizations: () => api.get('/admin/organizations/pending'),
   verifyOrganization: (id: string, action: string, reason?: string) => api.patch(`/admin/organizations/${id}/verify`, { action, reason }),
   getPendingListings: () => api.get('/admin/listings/pending'),
